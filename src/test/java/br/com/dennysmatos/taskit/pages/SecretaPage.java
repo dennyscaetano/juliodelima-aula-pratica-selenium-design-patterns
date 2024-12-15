@@ -17,4 +17,5 @@ public class SecretaPage extends BasePage {
     public String pegarASaudacao() {
         return mensagemDeSaudacao.getText();
     }
+
 }

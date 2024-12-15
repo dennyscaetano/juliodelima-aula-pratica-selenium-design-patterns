@@ -1,6 +1,7 @@
 package br.com.dennysmatos.taskit.pages;
 
 import br.com.dennysmatos.taskit.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,5 +25,11 @@ public class HomePage extends BasePage {
         botaoSignUp.click();
 
         return new RegistroPage(navegador);
+    }
+
+    public HomePage fazerLogOut() {
+        navegador.findElement(By.linkText("Logout")).click();
+
+        return this;
     }
 }

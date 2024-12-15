@@ -8,11 +8,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
+import java.util.Random;
 
 @DisplayName("Testes Automatizados da Funcionalidade de Sign Up")
 public class SignUpTests {
 
     private WebDriver navegador;
+    private String login;
 
     @BeforeEach
     public void setUp() {
@@ -21,24 +23,34 @@ public class SignUpTests {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("user-data-dir=/path/to/some/new/profile");
         navegador = new ChromeDriver(options);
-        navegador.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        navegador.manage().window().maximize();
+        navegador.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
     }
 
     @Test
     @DisplayName("Registrar um novo usuário com dados válidos")
     public void testRegistrarUmNovoUsuarioComDadosValidos() {
+
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        login = "armando_" + numeroAleatorio;
+
         String saudacaoAtual = new HomePage(navegador)
                 .acessarPaginaDoTaskit()
                 .abrirPaginaDeRegistro()
-                .registrarNovoUsuario("Rosinha", "rosinha00010", "123456")
+                .registrarNovoUsuario("Armando", login, "123456")
                 .pegarASaudacao();
 
-        Assertions.assertEquals("Hi, Rosinha", saudacaoAtual);
+        Assertions.assertEquals("Hi, Armando", saudacaoAtual);
     }
 
     @AfterEach
     public void tearDown() {
-        // Fechar o navegador
+        new HomePage(navegador)
+                .fazerLogOut();
+
         navegador.quit();
     }
 }
