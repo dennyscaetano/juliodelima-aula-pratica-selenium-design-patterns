@@ -1,41 +1,42 @@
 package br.com.dennysmatos.taskit.pages;
 
-import br.com.dennysmatos.taskit.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import br.com.dennysmatos.taskit.BasePage; // Herda da classe BasePage
+import org.openqa.selenium.WebDriver; // Interface principal do WebDriver
+import org.openqa.selenium.WebElement; // Representa um elemento da página web
+import org.openqa.selenium.support.FindBy; // Anotação para localizar elementos
 
 public class RegistroPage extends BasePage {
 
-    @FindBy(id = "name-sign-up")
+    @FindBy(id = "name-sign-up") // Localiza o campo de nome pelo ID
     private WebElement campoNome;
 
-    @FindBy(id = "login-sign-up")
+    @FindBy(id = "login-sign-up") // Localiza o campo de login pelo ID
     private WebElement campoLogin;
 
-    @FindBy(id = "password-sign-up")
+    @FindBy(id = "password-sign-up") // Localiza o campo de senha pelo ID
     private WebElement campoSenha;
 
-    @FindBy(id = "btn-submit-sign-up")
+    @FindBy(id = "btn-submit-sign-up") // Localiza o botão de salvar pelo ID
     private WebElement botaoSalvar;
 
     public RegistroPage(WebDriver navegador) {
-        super(navegador);
+        super(navegador); // Inicializa a classe base com o WebDriver
     }
 
     public SecretaPage registrarNovoUsuario(String nome, String login, String senha) {
-        // Vou digitar o nome no campo com ID igual a name-sign-up
+        // Preenche o campo de nome
         campoNome.sendKeys(nome);
 
-        // Vou digitar o login no campo com ID igual a login-sign-up
+        // Preenche o campo de login
         campoLogin.sendKeys(login);
 
-        // Vou digitar a senha com campo com ID igual a password-sign-up
+        // Preenche o campo de senha
         campoSenha.sendKeys(senha);
 
-        // Vou clicar no botão com ID igual a btn-submit-sign-up
+        // Clica no botão de salvar
         botaoSalvar.click();
 
+        // Retorna uma nova instância da SecretaPage (assumindo que é a página seguinte)
         return new SecretaPage(navegador);
     }
 }
